@@ -16,11 +16,29 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
 
+	<script type="text/javascript">
+	function copyText(nb) {
+		var divname = 'task-desc-'+nb;
+		var textname = 'task-textarea-'+nb;
+		var taskdesc = document.getElementById(divname).innerHTML;
+		document.getElementById(textname).value = taskdesc;
+	}
+
+	function Openedit(nb) {
+		var btnedit = 'task-edit-'+nb;
+		document.getElementById(btnedit).style.display = 'block';
+	}
+
+	function Closedit(nb) {
+		var btnedit = 'task-edit-'+nb;
+		setTimeout(function() {document.getElementById(btnedit).style.display = 'none';},500);
+	}
+	</script>
 	</head>
 	
 	<body>
 
 		<%= yield %>
-	
+
 	</body>
 </html>
