@@ -5,7 +5,7 @@ class CreateTodos < ActiveRecord::Migration
 	  	t.column :priority, :integer, default: 0
 	  	t.column :stage, :integer, default: 0
 	  	t.column :way, :string
-	  	t.timestamps
+	  	t.timestamps null: false
 	end
   end
 end

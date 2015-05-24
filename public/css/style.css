@@ -266,7 +266,7 @@ label {
 .task-stage {
   display: block;
   float: left;
-  width: 50%;
+  width: 60%;
   opacity: 0;
   transition: all 0.5s;
 }
