@@ -50,6 +50,5 @@ Ajout d'un système d'alerte lors de la création d'une nouvelle tâche!
 3. Taper la commande `heroku create [nom_de_votre_application]` pour créer l'application
 4. Taper la commande `git push heroku master` pour envoyer l'application sur Heroku
 5. Taper la commande `heroku run rake db:migrate` pour générer la base de donnée
-6. Ouvrir le navigateur et entrer l'adresse *[nom_de_votre_application].herokuapp.com* 
-
+6. Ouvrir le navigateur et entrer l'adresse *[nom_de_votre_application].herokuapp.com*
 
