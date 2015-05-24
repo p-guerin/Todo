@@ -1,4 +1,5 @@
 #Application Todo
+***
 
 Ce dépôt contient la dernière version de mon application "To Do"
 
@@ -11,6 +12,7 @@ L'application est compatibile avec le service [Heroku](https://www.heroku.com/ "
 **Nouveauté de la v0.9**
 
 Ajout d'un système d'alerte lors de la création d'une nouvelle tâche!
+
 
 
 ***
