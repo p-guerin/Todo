@@ -1,0 +1,342 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/montserrat-webfont.eot');
+    src: url('../fonts/montserrat/montserrat-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/montserrat/montserrat-webfont.woff2') format('woff2'),
+         url('../fonts/montserrat/montserrat-webfont.woff') format('woff'),
+         url('../fonts/montserrat/montserrat.ttf') format('truetype'),
+         url('../fonts/montserrat/montserrat-webfont.svg#montserratregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans';
+    src: url('../fonts/open-sans/opensans-webfont.eot');
+    src: url('../fonts/open-sans/opensans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/open-sans/opensans-webfont.woff2') format('woff2'),
+         url('../fonts/open-sans/opensans-webfont.woff') format('woff'),
+         url('../fonts/open-sans/opensans.ttf') format('truetype'),
+         url('../fonts/open-sans/opensans-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Oswald';
+    src: url('../fonts/oswald/oswald-webfont.eot');
+    src: url('../fonts/oswald/oswald-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/oswald/oswald-webfont.woff2') format('woff2'),
+         url('../fonts/oswald/oswald-webfont.woff') format('woff'),
+         url('../fonts/oswald/oswald.ttf') format('truetype'),
+         url('../fonts/oswald/oswald-webfont.svg#oswaldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/raleway/raleway-webfont.eot');
+    src: url('../fonts/raleway/raleway-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-webfont.svg#ralewayregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: Raleway;
+  color: rgba(52, 73, 94, 1);
+}
+.background {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  filter: grayscale(20%);
+  -webkit-filter: grayscale(20%);
+}
+.todo-app {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  min-height: 100%;
+}
+.alert {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0 2%;
+  height: 3em;
+  line-height: 3em;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: rgba(255,255,255,1);
+  text-shadow: -1px 0 1px rgba(0,0,0,0.25), 1px 0 1px rgba(0,0,0,0.25), 0 -1px 1px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.25);
+  z-index: 1000;
+}
+.alert-success {
+  background-color: rgba(39, 174, 96, 0.9);
+}
+.alert-error {
+  background-color: rgba(192, 57, 43, 0.9);
+}
+.task-add {
+  display: flex;
+  float: left;
+  width: 100%;
+  height: 4em;
+  padding: 0 1%;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.add {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 3em;
+}
+.task-input {
+  display: block;
+  float: left;
+  width: 70%;
+  height: 3em;
+  padding: 0 1%;
+  line-height: 3em;
+  font-size: 1em;
+  font-family: Oswald;
+  overflow-y: hidden;
+  border: solid 1px rgba(0,0,0,0.25);
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+  resize: none;
+}
+label {
+  display: block;
+  position: absolute;
+  height: 3em;
+  padding-left: 0.5em;
+  font-size: 0.75em;
+  font-family: Oswald;
+  color: rgba(149, 165, 166,1.0);
+  z-index: 1;
+}
+.label-way {
+  left: 70%;
+}
+.label-priority {
+  left: 80%;
+}
+.priority, .way {
+  display: block;
+  position: relative;
+  float: left;
+  width: 10%;
+  height: 3em;
+  line-height: 3em;
+  padding-left: 3.5%;
+  font-size: 1em;
+  font-family: Oswald;
+  background: #fff;
+  border: solid 1px rgba(0,0,0,0.25);
+  border-right: 0;
+}
+.add input[type="submit"] {
+  display: block;
+  float: left;
+  width: 10%;
+  height: 3em;
+  padding: 0 1%;
+  background: rgba(231, 76, 60,1.0);
+  line-height: 3em;
+  font-size: 1em;
+  font-family: Oswald;
+  border: none;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+  text-shadow: -1px 0 1px rgba(255,255,255,0.25), 1px 0 1px rgba(255,255,255,0.25), 0 -1px 1px rgba(255,255,255,0.25), 0 1px 1px rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: all 0.6s;
+}
+.add input[type="submit"]:hover {
+  background-color: rgba(52, 73, 94,1);
+  color: rgba(236, 240, 241,1);
+  text-shadow: none;
+}
+.task-list {
+  display: flex;
+  float: left;
+  width: 100%;
+  padding: 2.5% 1%;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.column {
+  display: block;
+  width: 33%;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 -3px 5px 0 rgba(0,0,0,0.5);
+}
+.column-title {
+  display: flex;
+  float: left;
+  width: 100%;
+  height: 3em;
+  font-family: Montserrat;
+  justify-content: center;
+  align-items: center;
+  line-height: 2em;
+  color: #fff;
+  text-shadow: -1px 0 1px rgba(0,0,0,0.25), 1px 0 1px rgba(0,0,0,0.25), 0 -1px 1px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.25);
+  border-radius: 15px 15px 0 0;
+}
+.column-todo .column-title {
+  background-color: rgba(52, 152, 219, 1);
+}
+.column-doing .column-title {
+  background-color: rgba(241, 196, 15, 1);
+}
+.column-done .column-title {
+  background-color: rgba(46, 204, 113, 1);
+}
+.no-task {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 25% 0;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(149, 165, 166,1);
+}
+.task {
+  display: block;
+  float: left;
+  width: 98%;
+  min-height: 8em;
+  margin: 2.5% 1%;
+  padding: 0 0 2.5% 0;
+  border: solid 2px transparent;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0.5);
+  transition: all 0.6s;
+}
+.task:hover {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 1);
+  border: solid 2px rgba(52, 73, 94, 1);
+}
+.task-change {
+  display: block;
+  float: left;
+  width: 100%;
+  line-height: 2em;
+  padding: 0 1%;
+  font-family: Montserrat;
+  font-size: 0.75em;
+  background-color: rgba(0,0,0,0.0625);
+}
+.task-id {
+  display: block;
+  float: left;
+  width: 100%;
+}
+.task-stage {
+  display: block;
+  float: left;
+  width: 50%;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.task-admin {
+  display: block;
+  float: right;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.edit-task {
+  display: none;
+  float: right;
+  margin-right: 1%;
+  background: none;
+  border: none;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.edit-task:hover {
+  color: rgba(39, 174, 96,1);
+}
+.task:hover .task-stage, .task:hover .task-admin, .task-desc:focus + .edit-task {
+  opacity: 1;
+}
+.task-desc {
+  display: block;
+  float: left;
+  width: 100%;
+  margin-top: 5%;
+  padding: 1%;
+  line-height: 1.5em;
+  text-align: justify;
+  font-family: Montserrat;
+  color: #000;
+}
+.select-stage, .select-way, .select-priority {
+  display: block;
+  float: left;
+  width: 33%;
+  margin: 0 0 0 -2%;
+  border: none;
+  background: none;
+  font-family: Raleway;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.priority-0 {
+  background-color: rgba(26, 188, 156, 0.25);
+}
+.priority-1 {
+  background-color: rgba(243, 156, 18, 0.25);
+}
+.priority-2 {
+  background-color: rgba(231, 76, 60, 0.25);
+}
+.select-stage:focus {
+  outline: none;
+}
+.delete-task {
+  display: block;
+  float: right;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.delete-task:hover {
+  color: rgba(231, 76, 60,1);
+}
+.invisible {
+  display: none;
+}
