@@ -1,0 +1,161 @@
+<div class="background"></div>
+<div class="todo-app">
+	<div class="task-add">
+		<form class="add" action="/" method="post" accept-charset="utf-8">
+			<input type="text" class="task-input" name="todos[task]" placeholder="New task">
+			<label class="label-way" for="way">Work:</label>
+			<select class="way" name="todos[way]">
+				<option value="Back" selected="selected"> Backend</option>
+				<option value="Front">Frontend</option>
+			</select>
+			<label class="label-priority" for="priority">Priority:</label>
+			<select class="priority" name="todos[priority]">
+				<option value="0" selected="selected">Low</option>
+				<option value="1">Medium</option>
+				<option value="2">High</option>
+			</select>
+			<input type="submit" value="Send">
+		</form>
+	</div>
+	
+	<div class="task-list">
+		<div class="column column-todo">
+			<div class="column-title">To do</div>
+			<% if @todo.any? == false %>
+				<div class="no-task">No Task.</div>
+			<% else %>
+				<% @todo.each do |todo| %>
+				<div class="task">
+					<div class="task-change priority-<%= todo.priority %>">
+						<div class="task-id"><% if todo.way == "Front" %><i class="fa fa-picture-o"></i><% else %><i class="fa fa-terminal"></i><% end %> <%= todo.way %>end</div>
+						<div class="task-stage">
+							<form action="/<%= todo.id %>" method="post">
+								<input type="hidden" name="_method" value="put">
+								<select class="select-stage" name="todos[stage]" onchange="this.form.submit()">
+									<option value="0" selected="selected">To Do</option>
+									<option value="1">Doing</option>
+									<option value="2">Done</option>
+								</select>
+								<select class="select-priority" name="todos[priority]" onchange="this.form.submit()">
+									<option value="0" <% if todo.priority == 0 %>selected="selected"<% end %>>Low</option>
+									<option value="1" <% if todo.priority == 1 %>selected="selected"<% end %>>Medium</option>
+									<option value="2" <% if todo.priority == 2 %>selected="selected"<% end %>>High</option>
+								</select>
+								<select class="select-way" name="todos[way]" onchange="this.form.submit()">
+									<option value="Back" <% if todo.way == "Back" %>selected="selected"<% end %>>Backend</option>
+									<option value="Front" <% if todo.way == "Front" %>selected="selected"<% end %>>Frontend</option>
+								</select>
+							</form>
+						</div>
+						<div class="task-admin">
+							<button type="submit" class="delete-task" form="delete-task-<%= todo.id %>"><i class="fa fa-times"></i> Delete</button>
+						</div>
+					</div>
+					<div id="task-desc-<%= todo.id %>" class="task-desc" contenteditable="true" onfocus="Openedit(<%= todo.id %>)" onblur="Closedit(<%= todo.id %>)" onclick="copyText(<%= todo.id %>)" onkeyup="copyText(<%= todo.id %>)"><%= todo.task %></div>
+					<button type="submit" id="task-edit-<%= todo.id %>" class="edit-task" form="edit-task-<%= todo.id %>"><i class="fa fa-pencil"></i> Edit</button>
+					<form id="edit-task-<%= todo.id %>" action="/<%= todo.id %>" method="post">
+						<input type="hidden" name="_method" value="put">
+						<textarea id="task-textarea-<%= todo.id %>" class="invisible" name="todos[task]"></textarea>
+					</form>
+					<form id="delete-task-<%= todo.id %>" action="/<%= todo.id %>" method="post">
+						<input type="hidden" name="_method" value="delete">
+					</form>
+				</div>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="column column-doing">
+			<div class="column-title">Doing</div>
+			<% if @doing.any? == false %>
+				<div class="no-task">No current task.</div>
+			<% else %>
+				<% @doing.each do |doing| %>
+				<div class="task">
+					<div class="task-change priority-<%= doing.priority %>">
+						<div class="task-id"><% if doing.way == "Front" %><i class="fa fa-picture-o"></i><% else %><i class="fa fa-terminal"></i><% end %> <%= doing.way %>end</div>
+						<div class="task-stage">
+							<form action="/<%= doing.id %>" method="post">
+								<input type="hidden" name="_method" value="put">
+								<select class="select-stage" name="todos[stage]" onchange="this.form.submit()">
+									<option value="0">To Do</option>
+									<option value="1" selected="selected">Doing</option>
+									<option value="2">Done</option>
+								</select>
+								<select class="select-priority" name="todos[priority]" onchange="this.form.submit()">
+									<option value="0" <% if doing.priority == 0 %>selected="selected"<% end %>>Low</option>
+									<option value="1" <% if doing.priority == 1 %>selected="selected"<% end %>>Medium</option>
+									<option value="2" <% if doing.priority == 2 %>selected="selected"<% end %>>High</option>
+								</select>
+								<select class="select-way" name="todos[way]" onchange="this.form.submit()">
+									<option value="Back" <% if doing.way == "Back" %>selected="selected"<% end %>>Backend</option>
+									<option value="Front" <% if doing.way == "Front" %>selected="selected"<% end %>>Frontend</option>
+								</select>
+							</form>
+						</div>
+						<div class="task-admin">
+							<button type="submit" class="delete-task" form="delete-task-<%= doing.id %>"><i class="fa fa-times"></i> Delete</button>
+						</div>
+					</div>
+					<div id="task-desc-<%= doing.id %>" class="task-desc" contenteditable="true" onfocus="Openedit(<%= doing.id %>)" onblur="Closedit(<%= doing.id %>)" onclick="copyText(<%= doing.id %>)" onkeyup="copyText(<%= doing.id %>)"><%= doing.task %></div>
+					<button type="submit" id="task-edit-<%= doing.id %>" class="edit-task" form="edit-task-<%= doing.id %>"><i class="fa fa-pencil"></i> Edit</button>
+					<form id="edit-task-<%= doing.id %>" action="/<%= doing.id %>" method="post">
+						<input type="hidden" name="_method" value="put">
+						<textarea id="task-textarea-<%= doing.id %>" class="invisible" name="todos[task]"></textarea>
+					</form>
+					<form id="delete-task-<%= doing.id %>" action="/<%= doing.id %>" method="post">
+						<input type="hidden" name="_method" value="delete">
+					</form>
+				</div>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="column column-done">
+			<div class="column-title">Done</div>
+			<% if @done.any? == false %>
+				<div class="no-task">Any task completed.</div>
+			<% else %>
+				<% @done.each do |done| %>
+				<div class="task">
+					<div class="task-change priority-<%= done.priority %>">
+						<div class="task-id"><% if done.way == "Front" %><i class="fa fa-picture-o"></i><% else %><i class="fa fa-terminal"></i><% end %> <%= done.way %>end</div>
+						<div class="task-stage">
+							<form action="/<%= done.id %>" method="post">
+								<input type="hidden" name="_method" value="put">
+								<select class="select-stage" name="todos[stage]" onchange="this.form.submit()">
+									<option value="0">To Do</option>
+									<option value="1">Doing</option>
+									<option value="2" selected="selected">Done</option>
+								</select>
+								<select class="select-priority" name="todos[priority]" onchange="this.form.submit()">
+									<option value="0" <% if done.priority == 0 %>selected="selected"<% end %>>Low</option>
+									<option value="1" <% if done.priority == 1 %>selected="selected"<% end %>>Medium</option>
+									<option value="2" <% if done.priority == 2 %>selected="selected"<% end %>>High</option>
+								</select>
+								<select class="select-way" name="todos[way]" onchange="this.form.submit()">
+									<option value="Back" <% if done.way == "Back" %>selected="selected"<% end %>>Backend</option>
+									<option value="Front" <% if done.way == "Front" %>selected="selected"<% end %>>Frontend</option>
+								</select>
+							</form>
+						</div>
+						<div class="task-admin">
+							<button type="submit" class="delete-task" form="delete-task-<%= done.id %>"><i class="fa fa-times"></i> Delete</button>
+						</div>
+					</div>
+					<div id="task-desc-<%= done.id %>" class="task-desc" contenteditable="true" onfocus="Openedit(<%= done.id %>)" onblur="Closedit(<%= done.id %>)" onclick="copyText(<%= done.id %>)" onkeyup="copyText(<%= done.id %>)"><%= done.task %></div>
+					<button type="submit" id="task-edit-<%= done.id %>" class="edit-task" form="edit-task-<%= done.id %>"><i class="fa fa-pencil"></i> Edit</button>
+					<form id="edit-task-<%= done.id %>" action="/<%= done.id %>" method="post">
+						<input type="hidden" name="_method" value="put">
+						<textarea id="task-textarea-<%= done.id %>" class="invisible" name="todos[task]"></textarea>
+					</form>
+					<form id="delete-task-<%= done.id %>" action="/<%= done.id %>" method="post">
+						<input type="hidden" name="_method" value="delete">
+					</form>
+				</div>
+				<% end %>
+			<% end %>
+		</div>
+
+	</div>
+</div>
