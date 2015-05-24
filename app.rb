@@ -4,6 +4,8 @@ require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 require './environments'
 
+enable :sessions
+
 ActiveRecord::Base.default_timezone = :local
 
 class Todo < ActiveRecord::Base
@@ -20,8 +22,11 @@ end
 
 post "/" do
   @todos = Todo.new(params[:todos])
-  @todos.save
-  redirect "/"
+  if @todos.save
+    redirect "/", :notice => 'New task added!'
+  else
+    redirect "/", :error => 'Something went wrong. Try again.'
+  end
 end
 
 put "/:id" do
